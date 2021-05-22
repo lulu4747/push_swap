@@ -275,17 +275,24 @@ static int	ft_dup_check(int ac, char **av)
 	char	*s2;
 
 	i = 1;
-	while (i < ac)
+	j = ac - 1;
+	while (i < j)
 	{
 		j = i + 1;
 		s1 = av[i];
-		while (j <= ac)
+		while (j < ac)
 		{
 			s2 = av[j];
-			if (ft_strcmp(s1, s2) != 0)
+			if (!ft_strcmp(s1, s2))
 			{
 				write(2, "2 or more occurences of the", 27);
-				write(2, "same number\nClosing program\n", 28);
+				write(2, " same number\nClosing program\n", 28);
+				return (1);
+			}
+			if (ft_is_number(s1) != 0)
+			{
+				write(2, "Non-numerical value found\n", 26);
+				write(2, "Closing program\n", 28);
 				return (1);
 			}
 			j++;
