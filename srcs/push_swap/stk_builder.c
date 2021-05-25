@@ -8,11 +8,6 @@ static t_stk	*stk_element(char *nb)
 	if (!stk)
 		return (NULL);
 	stk->n = ft_atoi(nb);
-	if (stk->n != ft_atol(nb))
-	{
-		write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
-		return (NULL);
-	}
 	return (stk);
 }
 

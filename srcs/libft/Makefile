@@ -1,6 +1,7 @@
 NAME	= libft.a
 
-SRC		= ft_atoi.c
+SRC		= ft_atoi_secure.c
+SRC		+= ft_atoi.c
 SRC		+= ft_atol.c
 SRC		+= ft_bzero.c
 SRC		+= ft_calloc.c

@@ -1,5 +1,41 @@
 #include "ps.h"
 
+int	stk_min(t_stk *stk)
+{
+	t_stk	*mv;
+	int	min;
+
+	min = stk->n;
+	mv->next = stk;
+	while (mv != stk)
+	{
+		if (stk->n > min)
+			min = stk->n;
+		mv = mv->next;
+	}
+	return (min);
+}
+
+int	stk_get(t_stk *stk, int n)
+{
+	int	i;
+
+	i = 1;
+	while (stk->n != n)
+	{
+		stk = stk->next;
+		i++;
+	}
+	return (i);
+}
+
+t_stk	*stk_get_to(t_stk *stk, int n)
+{
+	while (--i > 0)
+		stk = stk->next;
+	return (stk);
+}
+
 t_stk	*stk_last(t_stk *stk)
 {
 	t_stk	*last;

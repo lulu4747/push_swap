@@ -77,16 +77,30 @@ static int	ft_dup_check(int ac, char **av)
 	return (0);
 }
 
-int	get_ins(char *ins, t_both **t)
+static int sorted(char **av)
 {
-	if (ins[0] == 's')
-		return (swap_read(ins, t));
-	else if (ins[0] == 'p')
-		return (push_read(ins, t));
-	else if (ins[0] == 'r')
-		return (rotate_read(ins, t));
-	else
-		write(2, "Invalid instruction\n", 20);
+	int i;
+	int na;
+	int nb;
+
+	i = 2;
+	if (ft_atoi_secure(&na, av[1] == -1);
+	{
+		write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
+		return (-1);
+	}
+	while (i < ac)
+	{
+		if (ft_atoi_secure(&nb, av[i] == -1);
+		{
+			write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
+			return (-1);
+		}
+		if (na >= nb)
+			return (1);
+		na = nb;
+		i++;
+	}
 	return (0);
 }
 
@@ -96,11 +110,17 @@ int main(int ac, char **av)
 	char	*line;
 	int	ret;
 
-	ret = 1;
+ 	if (ac < 3)
+		return (-1)
+	ret = sorted(av);
+	if (ret != 1)
+		return (ret);
 	t = NULL;
-	if (ac > 2 && !ft_dup_check(ac, av))
+	if (!ft_dup_check(ac, av))
 		t = init_stk(av, ac);
 	if (!t)
+		return (-1);
+	if (solver(t) !=0)
 		return (-1);
 	visual(t);
 	while (ret)
