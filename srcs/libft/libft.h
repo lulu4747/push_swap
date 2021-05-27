@@ -11,6 +11,7 @@ int	ft_strcmp(char *s1, char *s2);
 int ft_is_digit(int c);
 int	ft_is_number(char *str);
 int	ft_atoi_secure(int *r, char *n);
+int	*ft_sort(int *t, int size);
 long	ft_atol(char *n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

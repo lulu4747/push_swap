@@ -6,6 +6,8 @@
 # include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
 
+# define INT_MIN -2147483648
+
 typedef	struct	s_stk
 {
 	int	n;
@@ -36,5 +38,12 @@ int	stk_get(t_stk *stk, int n);
 int	stk_min(t_stk *stk);
 void	stk_free(t_stk *stk);
 void	both_free(t_both *t);
+
+/*--Solver--*/
+
+void	cmd_print(char *s1, char *s2, t_both **t);
+void	get_on_top(t_both **t, int n);
+int	*stk_cpy_srt(t_stk *stk, int size);
+int	solver(t_both *t);
 
 #endif

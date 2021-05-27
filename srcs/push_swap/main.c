@@ -37,13 +37,13 @@ static int	nb_cmp(char *s1, char *s2)
 {
 	if (!ft_strcmp(s1, s2))
 	{
-		write(2, "2 or more occurences of the", 27);
+		write(2, "Error\n2 or more occurences of the", 33);
 		write(2, " same number\nClosing program\n", 28);
 		return (1);
 	}
 	if (ft_is_number(s1) != 0)
 	{
-		write(2, "Non-numerical value found\n", 26);
+		write(2, "Error\nNon-numerical value found\n", 29);
 		write(2, "Closing program\n", 16);
 		return (1);
 	}
@@ -77,21 +77,21 @@ static int	ft_dup_check(int ac, char **av)
 	return (0);
 }
 
-static int sorted(char **av)
+static int sorted(int ac, char **av)
 {
 	int i;
 	int na;
 	int nb;
 
 	i = 2;
-	if (ft_atoi_secure(&na, av[1] == -1);
+	if (ft_atoi_secure(&na, av[1]) == -1)
 	{
 		write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
 		return (-1);
 	}
 	while (i < ac)
 	{
-		if (ft_atoi_secure(&nb, av[i] == -1);
+		if (ft_atoi_secure(&nb, av[i]) == -1)
 		{
 			write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
 			return (-1);
@@ -107,12 +107,12 @@ static int sorted(char **av)
 int main(int ac, char **av)
 {
 	t_both	*t;
-	char	*line;
+	//char	*line;
 	int	ret;
 
  	if (ac < 3)
-		return (-1)
-	ret = sorted(av);
+		return (-1);
+	ret = sorted(ac, av);
 	if (ret != 1)
 		return (ret);
 	t = NULL;
@@ -120,16 +120,17 @@ int main(int ac, char **av)
 		t = init_stk(av, ac);
 	if (!t)
 		return (-1);
-	if (solver(t) !=0)
+	visual(t);
+	if (solver(t) != 1)
 		return (-1);
 	visual(t);
-	while (ret)
+	/*while (ret)
 	{
 		ret = get_next_line(0, &line);
 		get_ins(line, &t);
 		visual(t);
 		free(line);
-	}
+	}*/
 	both_free(t);
 	return (0);
 }

@@ -7,6 +7,7 @@ SRC		+= ft_bzero.c
 SRC		+= ft_calloc.c
 SRC		+= ft_is_digit.c
 SRC		+= ft_is_number.c
+SRC		+= ft_sort.c
 SRC		+= ft_strcmp.c
 SRC		+= ft_strlen.c
 

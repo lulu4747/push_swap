@@ -1,8 +1,11 @@
 NAME		= push_swap
 
-SRCS		= main.c
+SRCS		= chunk_srt.c
+SRCS		+= main.c
 SRCS		+= push.c
 SRCS		+= rotate.c
+SRCS		+= solver.c
+SRCS		+= srt_utils.c
 SRCS		+= swap.c
 SRCS		+= stk_builder.c
 SRCS		+= stk_clear.c

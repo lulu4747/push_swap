@@ -42,21 +42,21 @@ int	push_read(char *ins, t_both **t)
 		write(2, "Invalid instruction\n", 20);
 	else if (ins[1] == 'a')
 	{
-		if ((*t)->a_size >= 1)
+		if ((*t)->b_size >= 1)
 		{
-			(*t)->a_size--;
-			(*t)->b_size++;
-			return (push(&((*t)->a), &((*t)->b)));
+			(*t)->a_size++;
+			(*t)->b_size--;
+			return (push(&((*t)->b), &((*t)->a)));
 		}
 		return (1);
 	}
 	else if (ins[1] == 'b')
 	{
-		if ((*t)->b_size >= 1)
+		if ((*t)->a_size >= 1)
 		{
-			(*t)->b_size--;
-			(*t)->a_size++;
-			return (push(&((*t)->b), &((*t)->a)));
+			(*t)->b_size++;
+			(*t)->a_size--;
+			return (push(&((*t)->a), &((*t)->b)));
 		}
 		return (1);
 	}

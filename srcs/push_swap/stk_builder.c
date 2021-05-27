@@ -7,7 +7,11 @@ static t_stk	*stk_element(char *nb)
 	stk = malloc(sizeof(t_stk));
 	if (!stk)
 		return (NULL);
-	stk->n = ft_atoi(nb);
+	if (ft_atoi_secure(&(stk->n), nb))
+	{
+		write(2, "Error\nOverfloat\nClosing program\n", 32);
+		return(NULL);
+	}
 	return (stk);
 }
 
@@ -27,7 +31,10 @@ static t_stk	*build_stk(char **lst, int ac)
 		stk->next = stk_element(lst[i]);
 		stk = stk->next;
 		if (!stk)
+		{
+
 			return (NULL);
+		}
 	}
 	stk->next = top;
 	return (top);

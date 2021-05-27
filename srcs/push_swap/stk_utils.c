@@ -6,11 +6,11 @@ int	stk_min(t_stk *stk)
 	int	min;
 
 	min = stk->n;
-	mv->next = stk;
+	mv = stk->next;
 	while (mv != stk)
 	{
-		if (stk->n > min)
-			min = stk->n;
+		if (mv->n < min)
+			min = mv->n;
 		mv = mv->next;
 	}
 	return (min);
@@ -31,7 +31,7 @@ int	stk_get(t_stk *stk, int n)
 
 t_stk	*stk_get_to(t_stk *stk, int n)
 {
-	while (--i > 0)
+	while (--n > 0)
 		stk = stk->next;
 	return (stk);
 }
