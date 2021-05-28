@@ -54,7 +54,7 @@ static int	simple(t_both *t)
 {
 	while (t->a_size > 0)
 	{
-		get_on_top(&t, stk_min(t->a));
+		get_on_top(t, &(t->a), stk_min(t->a));
 		cmd_print("pb", NULL, &t);
 	}
 	while (t->b_size > 0)
@@ -94,5 +94,5 @@ int	solver(t_both *t)
 	t->a = reform(t->a, t->a_size);
 	if (!t->a)
 		return (-1);
-	return (1);
+	return (chunk_srt(t, (t->a_size / 20)));
 }

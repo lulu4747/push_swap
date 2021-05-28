@@ -45,19 +45,20 @@ void	cmd_print(char *s1, char *s2, t_both **t)
 	}
 }
 
-void	get_on_top(t_both **t, int n)
+void	get_on_top(t_both *t, t_stk **stk, int n)
 {
 	int pos;
 
-	pos = stk_get((*t)->a, n);
-	if (pos > (*t)->a_size / 2 && !((*t)->a_size % 2))
+	pos = stk_get((*stk), n);
+	if ((pos > t->a_size / 2 && !(t->a_size % 2)) ||
+		pos > ((t->a_size / 2) + 1))
 	{
-		while ((*t)->a->n != n)
-			cmd_print("ra", NULL, t);
+		while ((*stk)->n != n)
+			cmd_print("rra", NULL, &t);
 	}
 	else
 	{
-		while ((*t)->a->n != n)
-			cmd_print("rra", NULL, t);
+		while ((*stk)->n != n)
+			cmd_print("ra", NULL, &t);
 	}
 }
