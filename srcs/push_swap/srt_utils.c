@@ -30,7 +30,7 @@ int	get_ins(char *ins, t_both **t)
 	else if (ins[0] == 'r')
 		return (rotate_read(ins, t));
 	else
-		write(2, "Invalid instruction\n", 20);
+		write(2, "Error\n", 6);
 	return (0);
 }
 
@@ -45,20 +45,32 @@ void	cmd_print(char *s1, char *s2, t_both **t)
 	}
 }
 
-void	get_on_top(t_both *t, t_stk **stk, int n)
+void	get_on_top(t_both *t, t_stk **stk, int n, char s)
 {
 	int pos;
+	int size;
+	char	str[4];
 
+	str[0] = 'r';
+	if (s == 'a')
+		size = t->a_size;
+	else
+		size = t->b_size;
 	pos = stk_get((*stk), n);
-	if ((pos > t->a_size / 2 && !(t->a_size % 2)) ||
-		pos > ((t->a_size / 2) + 1))
+	if ((pos > size / 2 && !(size % 2)) ||
+		pos > ((size / 2) + 1))
 	{
+		str[1] = 'r';
+		str[2] = s;
+		str[3] = 0;
 		while ((*stk)->n != n)
-			cmd_print("rra", NULL, &t);
+			cmd_print(str, NULL, &t);
 	}
 	else
 	{
+		str[1] = s;
+		str[2] = 0;
 		while ((*stk)->n != n)
-			cmd_print("ra", NULL, &t);
+			cmd_print(str, NULL, &t);
 	}
 }

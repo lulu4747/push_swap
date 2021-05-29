@@ -1,14 +1,14 @@
 #include "ps.h"
 
-static int	finder(t_stk *first, int cs)
+static int	finder(t_stk *first, int cs, int max)
 {
 	t_stk	*t;
 	int	top;
-	int ct;
 	int bot;
+	int ct;
 	int cb;
 
-	if (first->n >= cs && first->n <= (cs + 19))
+	if (first->n >= cs && first->n <= max)
 		return (first->n);
 	ct = 1;
 	top = 0;
@@ -17,7 +17,7 @@ static int	finder(t_stk *first, int cs)
 	t = first->next;
 	while (t != first)
 	{
-		if (t->n >= cs && t->n <= (cs + 19))
+		if (t->n >= cs && t->n <= max)
 		{
 			if (top == 0)
 				top = t->n;
@@ -29,24 +29,24 @@ static int	finder(t_stk *first, int cs)
 		cb++;
 		t = t->next;
 	}
-	printf("top : %d	bot : %d\n", top, bot);
 	if (ct <= cb)
 		return (top);
 	return (bot);
 }
 
-static int	get_inf(t_stk *first, int n)
+/*static int	get_inf(t_stk *first, int n)
 {
 	t_stk	*t;
-	int	inf;
+	int	top;
+	int	bot;
 
-	inf = 0;
+	top = 0;
 	if (first->n < n)
-		inf = first->n;
+		return (first->n);
 	t = first->next;
 	while (t != first)
 	{
-		if (t->n < n && t->n > inf)
+		if (t->n < n)
 			inf = t->n;
 		t = t->next;
 	}
@@ -59,7 +59,7 @@ static void	prep_n_push(t_both **t, int n)
 
 	inf = 0;
 	if ((*t)->b != NULL)
-		inf = get_inf((*t)->a, n);
+		inf = get_inf((*t)->b, n);
 	if (inf != 0)
 	{
 		inf = stk_get((*t)->b, inf) - 1;
@@ -69,17 +69,17 @@ static void	prep_n_push(t_both **t, int n)
 	while (inf < 0)
 	{
 		inf++;
-		cmd_print("ra", NULL, t);
+		cmd_print("rb", NULL, t);
 	}
 	while (inf > 0)
 	{
 		inf--;
-		cmd_print("rra", NULL, t);
+		cmd_print("rrb", NULL, t);
 	}
 	cmd_print("pb", NULL, t);
-}
+}*/
 
-int	chunk_srt(t_both *t, int n)
+int	chunk_srt(t_both *t, int n, int size)
 {
 	int	cs;
 	int ci;
@@ -88,26 +88,26 @@ int	chunk_srt(t_both *t, int n)
 	ci = 0;
 	while (n > 0)
 	{
-		get_on_top(t, &(t->a), finder(t->a, cs));
-		prep_n_push(&t, t->a->n);
+		get_on_top(t, &(t->a), finder(t->a, cs, (cs + (size - 1))), 'a');
+		cmd_print("pb", NULL, &t);
 		ci++;
-		if (ci == 20)
+		if (ci == size)
 		{
 			ci = 0;
-			cs += 20;
+			cs += size;
 			n--;
 		}
 	}
 	while (t->a_size > 0)
 	{
-		get_on_top(t, &(t->a), cs);
+		get_on_top(t, &(t->a), cs, 'a');
 		cmd_print("pb", NULL, &t);
 		cs++;
 	}
 	cs--;
 	while (t->b_size > 0)
 	{
-		get_on_top(t, &(t->b), cs);
+		get_on_top(t, &(t->b), cs, 'b');
 		cmd_print("pa", NULL, &t);
 		cs--;
 	}
