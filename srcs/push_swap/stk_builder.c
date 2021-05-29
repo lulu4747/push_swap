@@ -9,7 +9,7 @@ static t_stk	*stk_element(char *nb)
 		return (NULL);
 	if (ft_atoi_secure(&(stk->n), nb))
 	{
-		write(2, "Error\nOverfloat\nClosing program\n", 32);
+		write(2, "Error\nOverflow\nClosing program\n", 32);
 		return(NULL);
 	}
 	return (stk);

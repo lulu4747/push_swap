@@ -37,13 +37,13 @@ static int	nb_cmp(char *s1, char *s2)
 {
 	if (!ft_strcmp(s1, s2))
 	{
-		write(2, "Error\n2 or more occurences of the", 33);
+		write(2, "2 or more occurences of the", 27);
 		write(2, " same number\nClosing program\n", 28);
 		return (1);
 	}
 	if (ft_is_number(s1) != 0)
 	{
-		write(2, "Error\nNon-numerical value found\n", 29);
+		write(2, "Error\nNon-numerical value found\n", 32);
 		write(2, "Closing program\n", 16);
 		return (1);
 	}
@@ -59,7 +59,7 @@ static int	ft_dup_check(int ac, char **av)
 	j = ac - 1;
 	if (ft_is_number(av[j]) != 0)
 	{
-		write(2, "Non-numerical value found\n", 26);
+		write(2, "Error\nNon-numerical value found\n", 32);
 		write(2, "Closing program\n", 16);
 		return (1);
 	}
@@ -86,14 +86,14 @@ static int sorted(int ac, char **av)
 	i = 2;
 	if (ft_atoi_secure(&na, av[1]) == -1)
 	{
-		write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
+		write(2, "Error\nOverflow\nClosing program\n", 32);
 		return (-1);
 	}
 	while (i < ac)
 	{
 		if (ft_atoi_secure(&nb, av[i]) == -1)
 		{
-			write(2, "Error\nn > INT_MAX or n < INT_MIN\n", 35);
+		write(2, "Error\nOverflow\nClosing program\n", 32);
 			return (-1);
 		}
 		if (na >= nb)
@@ -120,10 +120,10 @@ int main(int ac, char **av)
 		t = init_stk(av, ac);
 	if (!t)
 		return (-1);
-	visual(t);
+	//visual(t);
 	if (solver(t) != 1)
 		return (-1);
-	visual(t);
+	//visual(t);
 	/*while (ret)
 	{
 		ret = get_next_line(0, &line);
