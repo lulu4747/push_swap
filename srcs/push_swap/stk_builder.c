@@ -10,8 +10,10 @@ static t_stk	*stk_element(char *nb)
 	if (ft_atoi_secure(&(stk->n), nb))
 	{
 		write(2, "Error\nOverflow\nClosing program\n", 32);
-		return(NULL);
+		free(stk);
+		return (NULL);
 	}
+	stk->next = NULL;
 	return (stk);
 }
 
@@ -19,7 +21,7 @@ static t_stk	*build_stk(char **lst, int ac)
 {
 	t_stk	*stk;
 	t_stk	*top;
-	int	i;
+	int		i;
 
 	i = 1;
 	stk = stk_element(lst[1]);
@@ -32,7 +34,7 @@ static t_stk	*build_stk(char **lst, int ac)
 		stk = stk->next;
 		if (!stk)
 		{
-
+			stk_free(top);
 			return (NULL);
 		}
 	}

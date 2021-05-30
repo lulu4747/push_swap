@@ -2,7 +2,7 @@
 
 int	*stk_cpy_srt(t_stk *stk, int size)
 {
-	int i;
+	int	i;
 	int	*t;
 
 	t = malloc(sizeof(int) * size);
@@ -47,8 +47,8 @@ void	cmd_print(char *s1, char *s2, t_both **t)
 
 void	get_on_top(t_both *t, t_stk **stk, int n, char s)
 {
-	int pos;
-	int size;
+	int		pos;
+	int		size;
 	char	str[4];
 
 	str[0] = 'r';
@@ -57,8 +57,7 @@ void	get_on_top(t_both *t, t_stk **stk, int n, char s)
 	else
 		size = t->b_size;
 	pos = stk_get((*stk), n);
-	if ((pos > size / 2 && !(size % 2)) ||
-		pos > ((size / 2) + 1))
+	if ((pos > size / 2 && !(size % 2)) || pos > ((size / 2) + 1))
 	{
 		str[1] = 'r';
 		str[2] = s;

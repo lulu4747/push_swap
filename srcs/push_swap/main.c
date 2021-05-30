@@ -44,48 +44,44 @@ static int	ft_dup_check(int ac, char **av)
 	return (0);
 }
 
-static int sorted(int ac, char **av)
+static int	sorted(t_both *t)
 {
-	int i;
-	int na;
-	int nb;
+	t_stk	*stk;
+	int		n1;
+	int		n2;	
 
-	i = 2;
-	if (ft_atoi_secure(&na, av[1]) == -1)
-	{
-		write(2, "Error\nOverflow\nClosing program\n", 32);
+	stk = t->a;
+	stk = stk->next;
+	if (t->a->n > stk->n)
 		return (1);
-	}
-	while (i < ac)
+	while (stk->next != t->a)
 	{
-		if (ft_atoi_secure(&nb, av[i]) == -1)
-		{
-		write(2, "Error\nOverflow\nClosing program\n", 32);
+		n1 = stk->n;
+		n2 = stk->next->n;
+		if (n1 > n2)
 			return (1);
-		}
-		if (na >= nb)
-			return (1);
-		na = nb;
-		i++;
+		stk = stk->next;
 	}
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_both	*t;
-	int	ret;
+	int		ret;
 
- 	if (ac < 3)
-		return (1);
-	ret = sorted(ac, av);
-	if (ret != 1)
-		return (ret);
+	if (ac == 1)
+		return (0);
+	if (ac == 2)
+		return (ft_dup_check(ac, av));
 	t = NULL;
 	if (!ft_dup_check(ac, av))
 		t = init_stk(av, ac);
 	if (!t)
 		return (1);
+	ret = sorted(t);
+	if (!ret)
+		return (ret);
 	if (solver(t) != 1)
 		return (1);
 	both_free(t);

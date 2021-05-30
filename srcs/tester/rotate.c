@@ -22,7 +22,7 @@ static int	reverse_read(char *ins, t_both **t)
 {
 	if (ins[3] != 0)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Erro8\n", 6);
 		return (1);
 	}
 	else if (ins[2] == 'a')
@@ -31,7 +31,7 @@ static int	reverse_read(char *ins, t_both **t)
 		(*t)->b = r_rotate((*t)->b);
 	else
 	{
-		write(2, "Error\n", 6);
+		write(2, "Erro9\n", 6);
 		return (1);
 	}
 	return (0);
@@ -42,7 +42,7 @@ int	rotate_read(char *ins, t_both **t)
 	if (ins[1] == 'r')
 		return (reverse_read(ins, t));
 	else if (ins[2] != 0)
-		write(2, "Error\n", 6);
+		write(2, "Err10\n", 6);
 	else if (ins[1] == 'a')
 	{
 		(*t)->a = rotate((*t)->a);
@@ -54,6 +54,6 @@ int	rotate_read(char *ins, t_both **t)
 		return (0);
 	}
 	else
-		write(2, "Error\n", 6);
+		write(2, "Err11\n", 6);
 	return (1);
 }

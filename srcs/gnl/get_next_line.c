@@ -1,68 +1,54 @@
 #include "get_next_line.h"
-#include <string.h>
 
-int		get_next_line(int fd, char **line)
+static char	*nealloc(char **ptr, int size_supp)
 {
-	static t_gnl	*mysta = NULL;
-	int				n;
+	int		strl;
+	char	*tptr;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
-		return (-1);
-	n = -1;
-	(mysta == NULL) ? mysta = nw(fd) : 0;
-	(mysta != NULL) ? n = readline(mysta, fd, line) : 0;
-	(n > 0) ? n = 1 : 0;
-	if (mysta != NULL && ((n == 0 || n == -1)
-		|| (fd == 0 && mysta->buf != NULL && ft_strlen(mysta->buf) == 0)))
+	strl = 0;
+	if ((*ptr) != NULL)
+		strl = ft_strlen(*ptr);
+	tptr = (char *)malloc(sizeof(char) * (strl + size_supp));
+	if (!tptr)
+		return (0);
+	if (*ptr && *(*ptr))
 	{
-		if (mysta->buf != NULL)
-		{
-			(mysta->buf != NULL) ? free(mysta->buf) : 0;
-			mysta->buf = NULL;
-		}
-		free(mysta);
-		mysta = NULL;
+		while (*(*ptr))
+			*tptr++ = *((*ptr)++);
+		*tptr = 0;
 	}
-	return (n);
+	free(*ptr - strl);
+	*ptr = tptr - strl;
+	return (*ptr);
 }
 
-int		readline(t_gnl *ptr, int fd, char **line)
+static int	err(char **line, int *ret, int rv)
 {
-	int		eol;
-	char	*buf;
-
-	eol = ft_istrchr(ptr->buf, '\n');
-	if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (-1);
-	buf[BUFFER_SIZE] = '\0';
-	while (eol == -1 && (((ptr->n = read(fd, buf, BUFFER_SIZE)) > 0)))
-	{
-		buf[ptr->n] = '\0';
-		if (!(ptr->buf = ft_strjoinfree(ptr->buf, buf, 1)))
-			return (-1);
-		eol = ft_istrchr(ptr->buf, '\n');
-	}
-	if (!(*line = ft_strccpy(ptr->buf, '\n')))
-		ptr->n = -1;
-	free(buf);
-	if (ptr->n > 0 && eol != -1)
-	{
-		buf = ft_strccpy(&ptr->buf[eol], '\0');
-		free(ptr->buf);
-		ptr->buf = buf;
-	}
-	return (ptr->n);
+	free(*line);
+	*line = 0;
+	*ret = rv;
+	return (rv);
 }
 
-t_gnl	*nw(int fd)
+int	get_next_line(char **line, int *ret)
 {
-	t_gnl	*ptr;
+	int	llen;
 
-	if ((ptr = malloc(sizeof(t_gnl))) != NULL)
+	*ret = 1;
+	llen = -1;
+	*line = 0;
+	while (!(*line) || (*line)[llen])
 	{
-		ptr->fd = fd;
-		ptr->buf = NULL;
-		ptr->n = 1;
+		llen += *ret;
+		if (*ret == -1 || !nealloc(line, 2))
+			return (err(line, ret, -1));
+		*ret = read(0, *line + llen, 1);
+		*(*line + llen + 1) = 0;
+		if (!*ret || (*line)[llen] == '\n')
+			(*line)[llen] = 0;
 	}
-	return (ptr);
+	*ret = (llen || *ret);
+	if (!*ret)
+		return (err(line, ret, *ret));
+	return (1);
 }

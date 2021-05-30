@@ -6,7 +6,7 @@ void	stk_free(t_stk *stk)
 	t_stk	*nxt;
 
 	fre = stk->next;
-	while (fre != stk)
+	while (fre != NULL && fre != stk)
 	{
 		nxt = fre->next;
 		free(fre);

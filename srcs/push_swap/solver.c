@@ -62,10 +62,10 @@ static int	simple(t_both *t)
 	return (1);
 }
 
-static t_stk *reform(t_stk *a, int size)
+static t_stk	*reform(t_stk *a, int size)
 {
-	int	i;
-	int	*t;
+	int		i;
+	int		*t;
 	t_stk	*first;
 
 	first = a;

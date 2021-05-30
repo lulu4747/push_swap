@@ -8,8 +8,12 @@ SRC		+= ft_calloc.c
 SRC		+= ft_is_digit.c
 SRC		+= ft_is_number.c
 SRC		+= ft_sort.c
+SRC		+= ft_strchr.c
 SRC		+= ft_strcmp.c
+SRC		+= ft_strdup.c
+SRC		+= ft_strjoin.c
 SRC		+= ft_strlen.c
+SRC		+= ft_substr.c
 
 INC = libft.h
 OBJ_DIR = ./obj/

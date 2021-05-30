@@ -2,7 +2,7 @@
 
 static int	empty_stk(t_stk **fr, t_stk **to)
 {
-	t_stk *cut;
+	t_stk	*cut;
 
 	cut = stk_last(*to);
 	(*fr)->next = *to;
@@ -14,7 +14,7 @@ static int	empty_stk(t_stk **fr, t_stk **to)
 
 static int	push(t_stk **fr, t_stk **to)
 {
-	t_stk *cut;
+	t_stk	*cut;
 
 	if ((*fr)->next == *fr)
 		return (empty_stk(fr, to));

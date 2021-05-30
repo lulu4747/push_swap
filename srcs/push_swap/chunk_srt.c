@@ -1,102 +1,57 @@
 #include "ps.h"
 
-static int	finder(t_stk *first, int cs, int max)
+static int	fnd(t_stk *first, t_stk *t, int cs, int max)
 {
-	t_stk	*t;
-	int	top;
-	int bot;
-	int ct;
-	int cb;
+	int		count[4];
 
 	if (first->n >= cs && first->n <= max)
 		return (first->n);
-	ct = 1;
-	top = 0;
-	bot = 0;
-	cb = 0;
-	t = first->next;
+	count[0] = 0;
+	count[1] = 0;
+	count[2] = 0;
+	count[3] = 1;
 	while (t != first)
 	{
 		if (t->n >= cs && t->n <= max)
 		{
-			if (top == 0)
-				top = t->n;
-			bot = t->n;
-			cb = 0;
+			if (count[0] == 0)
+				count[0] = t->n;
+			count[1] = t->n;
+			count[2] = 0;
 		}
-		if (top == 0)
-			ct++;
-		cb++;
+		if (count[0] == 0)
+			(count[3])++;
+		(count[2])++;
 		t = t->next;
 	}
-	if (ct <= cb)
-		return (top);
-	return (bot);
+	if (count[3] <= count[2])
+		return (count[0]);
+	return (count[1]);
 }
 
-/*static int	get_inf(t_stk *first, int n)
+int	chunk(t_both *t, int c, int s)
 {
-	t_stk	*t;
-	int	top;
-	int	bot;
+	int	i;
 
-	top = 0;
-	if (first->n < n)
-		return (first->n);
-	t = first->next;
-	while (t != first)
+	i = 0;
+	while (i < s)
 	{
-		if (t->n < n)
-			inf = t->n;
-		t = t->next;
+		get_on_top(t, &(t->a), fnd(t->a, t->a->next, c, (c + (s - 1))), 'a');
+		cmd_print("pb", NULL, &t);
+		i++;
 	}
-	return (inf);
+	return (s);
 }
-
-static void	prep_n_push(t_both **t, int n)
-{
-	int inf;
-
-	inf = 0;
-	if ((*t)->b != NULL)
-		inf = get_inf((*t)->b, n);
-	if (inf != 0)
-	{
-		inf = stk_get((*t)->b, inf) - 1;
-		if (inf <= (((*t)->b_size / 2) + 1))
-			inf = inf * -1;
-	}
-	while (inf < 0)
-	{
-		inf++;
-		cmd_print("rb", NULL, t);
-	}
-	while (inf > 0)
-	{
-		inf--;
-		cmd_print("rrb", NULL, t);
-	}
-	cmd_print("pb", NULL, t);
-}*/
 
 int	chunk_srt(t_both *t, int n, int size)
 {
 	int	cs;
-	int ci;
 
 	cs = 1;
-	ci = 0;
 	while (n > 0)
 	{
-		get_on_top(t, &(t->a), finder(t->a, cs, (cs + (size - 1))), 'a');
-		cmd_print("pb", NULL, &t);
-		ci++;
-		if (ci == size)
-		{
-			ci = 0;
-			cs += size;
-			n--;
-		}
+		cs += chunk(t, cs, size);
+		n--;
 	}
 	while (t->a_size > 0)
 	{

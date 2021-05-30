@@ -3,7 +3,7 @@
 int	stk_min(t_stk *stk)
 {
 	t_stk	*mv;
-	int	min;
+	int		min;
 
 	min = stk->n;
 	mv = stk->next;

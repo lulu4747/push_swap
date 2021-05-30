@@ -48,8 +48,8 @@ NAME_BONUS		= checker_bonus
 
 SRCS_BONUS		= is_sorted.c
 SRCS_BONUS		+= main.c
-SCRS_BONUS		+= push.c
-SCRS_BONUS		+= rotate.c
+SRCS_BONUS		+= push.c
+SRCS_BONUS		+= rotate.c
 SRCS_BONUS		+= srt_utils.c
 SRCS_BONUS		+= stk_builder.c
 SRCS_BONUS		+= stk_clear.c

@@ -1,7 +1,6 @@
 NAME	= get_next_line.a
 
-SRC		= get_next_line_utils.c
-SRC		+= get_next_line.c
+SRC		= get_next_line.c
 
 INC = get_next_line.h
 OBJ_DIR = ./obj/
