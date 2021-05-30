@@ -18,8 +18,6 @@ static int	cmpn(t_stk *stk)
 int	is_sorted(t_both *t)
 {
 	t_stk	*stk;
-	int		n1;
-	int		n2;	
 
 	if (t->b_size != 0)
 	{

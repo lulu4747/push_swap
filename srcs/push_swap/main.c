@@ -44,27 +44,6 @@ static int	ft_dup_check(int ac, char **av)
 	return (0);
 }
 
-static int	sorted(t_both *t)
-{
-	t_stk	*stk;
-	int		n1;
-	int		n2;	
-
-	stk = t->a;
-	stk = stk->next;
-	if (t->a->n > stk->n)
-		return (1);
-	while (stk->next != t->a)
-	{
-		n1 = stk->n;
-		n2 = stk->next->n;
-		if (n1 > n2)
-			return (1);
-		stk = stk->next;
-	}
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_both	*t;

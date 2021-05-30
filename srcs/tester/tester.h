@@ -34,6 +34,7 @@ t_both	*init_stk(char **lst, int ac);
 t_stk	*stk_last(t_stk *stk);
 void	stk_free(t_stk *stk);
 void	both_free(t_both *t);
+t_stk	*reform(t_stk *a, int size);
 
 /*--Tester--*/
 

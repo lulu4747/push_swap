@@ -41,6 +41,7 @@ void	both_free(t_both *t);
 void	cmd_print(char *s1, char *s2, t_both **t);
 void	get_on_top(t_both *t, t_stk **stk, int n, char s);
 int		*stk_cpy_srt(t_stk *stk, int size);
+int		sorted(t_both *t);
 int		solver(t_both *t);
 int		chunk_srt(t_both *t, int n, int size);
 

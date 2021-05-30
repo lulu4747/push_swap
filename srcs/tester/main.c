@@ -41,20 +41,35 @@ static int	ft_dup_check(int ac, char **av)
 	return (0);
 }
 
+static int	no_need(int ac, char **av)
+{
+	int	ret;
+
+	ret = 0;
+	if (ac == 2)
+	{
+		ret = ft_dup_check(ac, av);
+		if (!ret)
+			write(1, "OK\n", 3);
+	}
+	return (ret);
+}
+
 int	main(int ac, char **av)
 {
 	t_both	*t;
 	int		ret;
 	char	*line;
 
-	if (ac == 1)
-		return (0);
-	if (ac == 2)
-		return (ft_dup_check(ac, av));
+	if (ac < 3)
+		return (no_need(ac, av));
 	t = NULL;
 	if (!ft_dup_check(ac, av))
 		t = init_stk(av, ac);
 	if (!t)
+		return (1);
+	t->a = reform(t->a, t->a_size);
+	if (!(t->a))
 		return (1);
 	ret = 1;
 	line = NULL;

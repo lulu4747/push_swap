@@ -19,6 +19,9 @@ LIBFT_A			= $(addprefix $(LIBFT_DIR), libft.a)
 OBJ				= $(addprefix $(OBJ_DIR),$(SRCS:.c=.o))
 INC				= ./srcs/push_swap/ps.h
 
+GNL_DIR			= ./srcs/gnl/
+GNL_A			= $(addprefix $(GNL_DIR), get_next_line.a)
+
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra
 RM				= rm -f
@@ -37,11 +40,16 @@ $(NAME):$(OBJ) $(INC) $(LIBFT_A)
 
 clean:
 	$(RM_DIR) $(OBJ_DIR)
+	$(RM_DIR) $(OBJ_DIR_BONUS)
+	$(MAKE) clean -C $(GNL_DIR)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean:
 	$(RM_DIR) $(OBJ_DIR)
 	$(RM) $(NAME)
+	$(RM_DIR) $(OBJ_DIR_BONUS)
+	$(RM) $(NAME_BONUS)
+	$(MAKE) fclean -C $(GNL_DIR)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 NAME_BONUS		= checker_bonus
@@ -54,9 +62,6 @@ SRCS_BONUS		+= srt_utils.c
 SRCS_BONUS		+= stk_builder.c
 SRCS_BONUS		+= stk_clear.c
 SRCS_BONUS		+= swap.c
-
-GNL_DIR			= ./srcs/gnl/
-GNL_A			= $(addprefix $(GNL_DIR), get_next_line.a)
 
 TEST_DIR		= ./srcs/tester/
 OBJ_DIR_BONUS	= ./srcs/obj_bonus/
@@ -75,17 +80,8 @@ $(OBJ_DIR_BONUS)%.o:$(TEST_DIR)%.c $(INC_BONUS)
 $(NAME_BONUS):$(OBJ_BONUS) $(INC_BONUS) $(LIBFT_A) $(GNL_A)
 	$(CC) $(CFLAGS) $(OBJ_BONUS) $(GNL_A) $(LIBFT_A) -o $(NAME_BONUS)
 
-clean_bonus:clean
-	$(RM_DIR) $(OBJ_DIR_BONUS)
-	$(MAKE) clean -C $(GNL_DIR)
+re:fclean all
 
-fclean_bonus:fclean
-	$(RM_DIR) $(OBJ_DIR_BONUS)
-	$(RM) $(NAME_BONUS)
-	$(MAKE) fclean -C $(GNL_DIR)
+re_bonus:fclean bonus
 
-re:fclean_bonus bonus
-
-re_bonus:fclean all
-
-.PHONY:all clean fclean re
+.PHONY:all clean fclean bonus re re_bonus

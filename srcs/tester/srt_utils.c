@@ -10,6 +10,50 @@ t_stk	*stk_last(t_stk *stk)
 	return (last);
 }
 
+static int	*stk_cpy_srt(t_stk *stk, int size)
+{
+	int	i;
+	int	*t;
+
+	t = malloc(sizeof(int) * size);
+	if (!t)
+	{
+		stk_free(stk);
+		return (NULL);
+	}
+	i = -1;
+	while (++i < size)
+	{
+		t[i] = stk->n;
+		stk = stk->next;
+	}
+	t = ft_sort(t, size);
+	return (t);
+}
+
+t_stk	*reform(t_stk *a, int size)
+{
+	int		i;
+	int		*t;
+	t_stk	*first;
+
+	first = a;
+	t = stk_cpy_srt(a, size);
+	if (!t)
+		return (NULL);
+	i = -1;
+	while (++i < size)
+	{
+		while (a->n != t[i])
+			a = a->next;
+		a->n = i + 1;
+		a = a->next;
+	}
+	free(t);
+	a = first;
+	return (a);
+}
+
 int	get_ins(char *ins, t_both **t)
 {
 	if (ins == NULL)

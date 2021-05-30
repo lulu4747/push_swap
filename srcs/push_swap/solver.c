@@ -23,31 +23,16 @@ static t_both	*three_srt(t_both *t)
 
 static int	quick(t_both *t)
 {
-	int	minpos;
-
-	while (t->a_size > 3)
+	while (t->a_size > 3 && sorted(t) == 1)
 	{
-		minpos = stk_get(t->a, stk_min(t->a));
-		if (minpos > 3)
-		{
-			while (t->a->n != stk_min(t->a))
-				cmd_print("rra", NULL, &t);
-		}
-		else
-		{
-			while (t->a->n != stk_min(t->a))
-				cmd_print("ra", NULL, &t);
-		}
+		get_on_top(t, &(t->a), stk_min(t->a), 'a');
 		cmd_print("pb", NULL, &t);
 	}
-	t = three_srt(t);
-	if (t->b_size == 2 && t->b->n < t->b->next->n)
-		cmd_print("sb", NULL, &t);
+	if (sorted(t) == 1)
+		t = three_srt(t);
 	while (t->b_size > 0)
 		cmd_print("pa", NULL, &t);
-	while (t->a->n != stk_min(t->a))
-		cmd_print("ra", NULL, &t);
-	return (1);
+	return (0);
 }
 
 static int	simple(t_both *t)
@@ -59,7 +44,7 @@ static int	simple(t_both *t)
 	}
 	while (t->b_size > 0)
 		cmd_print("pa", NULL, &t);
-	return (1);
+	return (0);
 }
 
 static t_stk	*reform(t_stk *a, int size)
@@ -87,13 +72,13 @@ static t_stk	*reform(t_stk *a, int size)
 
 int	solver(t_both *t)
 {
+	t->a = reform(t->a, t->a_size);
+	if (!t->a)
+		return (-1);
 	if (t->a_size <= 5)
 		return (quick(t));
 	else if (t->a_size <= 17)
 		return (simple(t));
-	t->a = reform(t->a, t->a_size);
-	if (!t->a)
-		return (-1);
 	if (t->a_size <= 100)
 		return (chunk_srt(t, (t->a_size / 17), 17));
 	return (chunk_srt(t, (t->a_size / 45), 45));

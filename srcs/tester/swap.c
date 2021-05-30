@@ -18,7 +18,7 @@ int	swap_read(char *ins, t_both **t)
 
 	r = 1;
 	if (ins[2] != 0)
-		write(2, "Err14\n", 6);
+		write(2, "Error\n", 6);
 	else if (ins[1] == 'a')
 	{
 		if ((*t)->a_size > 1)
@@ -37,6 +37,6 @@ int	swap_read(char *ins, t_both **t)
 			return (0);
 	}
 	else
-		write(2, "Err15\n", 6);
+		write(2, "Error\n", 6);
 	return (1);
 }
