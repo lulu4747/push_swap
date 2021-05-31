@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/31 12:49:08 by lfourage          #+#    #+#             */
+/*   Updated: 2021/05/31 12:57:32 by lfourage         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
 static t_stk	*rotate(t_stk *stk)
@@ -25,9 +37,9 @@ static int	reverse_read(char *ins, t_both **t)
 		write(2, "Invalid instruction\n", 20);
 		return (1);
 	}
-	else if (ins[2] == 'a')
+	else if (ins[2] == 'a' && (*t)->a_size > 0)
 		(*t)->a = r_rotate((*t)->a);
-	else if (ins[2] == 'b')
+	else if (ins[2] == 'b' && (*t)->b_size > 0)
 		(*t)->b = r_rotate((*t)->b);
 	else
 	{
@@ -45,12 +57,14 @@ int	rotate_read(char *ins, t_both **t)
 		write(2, "Invalid instruction\n", 20);
 	else if (ins[1] == 'a')
 	{
-		(*t)->a = rotate((*t)->a);
+		if ((*t)->a_size > 0)
+			(*t)->a = rotate((*t)->a);
 		return (0);
 	}
 	else if (ins[1] == 'b')
 	{
-		(*t)->b = rotate((*t)->b);
+		if ((*t)->b_size > 0)
+			(*t)->b = rotate((*t)->b);
 		return (0);
 	}
 	else

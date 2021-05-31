@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/31 12:48:34 by lfourage          #+#    #+#             */
+/*   Updated: 2021/05/31 12:59:45 by lfourage         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
 static int	nb_cmp(char *s1, char *s2)
@@ -47,7 +59,6 @@ static int	ft_dup_check(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_both	*t;
-	int		ret;
 
 	if (ac == 1)
 		return (0);
@@ -58,11 +69,11 @@ int	main(int ac, char **av)
 		t = init_stk(av, ac);
 	if (!t)
 		return (1);
-	ret = sorted(t);
-	if (!ret)
-		return (ret);
-	if (solver(t) != 1)
-		return (1);
+	while (sorted(t) != 0)
+	{
+		if (solver(t) != 1)
+			return (1);
+	}
 	both_free(t);
 	return (0);
 }
