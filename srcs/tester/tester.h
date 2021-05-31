@@ -6,7 +6,7 @@
 /*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:51:10 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 17:38:35 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 18:32:19 by lfourage         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ t_stk	*reform(t_stk *a, int size);
 
 /*--Tester--*/
 
-int		is_sorted(t_both *t);
+int		is_sorted(t_both **t);
 
 #endif

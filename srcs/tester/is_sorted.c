@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:50:13 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:50:45 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 18:40:36 by lfourage         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,31 @@ static int	cmpn(t_stk *stk)
 	return (0);
 }
 
-int	is_sorted(t_both *t)
+int	is_sorted(t_both **t)
 {
 	t_stk	*stk;
+	int		ret;
 
-	if (t->b_size != 0)
+	ret = 0;
+	if ((*t)->b_size != 0)
 	{
 		write(2, "KO\n", 3);
-		return (1);
+		ret = 1;
 	}
-	stk = t->a;
+	stk = (*t)->a;
 	stk = stk->next;
-	if (t->a->n > stk->n)
+	if ((*t)->a->n > stk->n && !ret)
 	{
 		write(2, "KO\n", 3);
-		return (1);
+		ret = 1;
 	}
-	while (stk->next != t->a)
+	while (stk->next != (*t)->a && !ret)
 	{
-		if (cmpn(stk))
-			return (1);
+		ret = cmpn(stk);
 		stk = stk->next;
 	}
-	write(1, "OK\n", 3);
-	both_free(t);
+	if (!ret)
+		write(1, "OK\n", 3);
+	both_free(*t);
 	return (0);
 }

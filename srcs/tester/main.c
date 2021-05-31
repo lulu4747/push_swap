@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:50:47 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:50:50 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 18:39:03 by lfourage         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,13 @@ static int	no_need(int ac, char **av)
 	{
 		ret = ft_dup_check(ac, av);
 		if (!ret)
-			write(1, "OK\n", 3);
+		{
+			ret = ft_atoi_secure(&ac, av[1]);
+			if (!ret)
+				write(1, "OK\n", 3);
+			else
+				write(1, "KO\n", 3);
+		}
 	}
 	return (ret);
 }
@@ -92,5 +98,5 @@ int	main(int ac, char **av)
 		free(line);
 		line = NULL;
 	}
-	return (is_sorted(t));
+	return (is_sorted(&t));
 }
