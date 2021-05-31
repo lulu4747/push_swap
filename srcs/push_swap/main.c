@@ -6,7 +6,7 @@
 /*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:34 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:59:45 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 17:34:16 by lfourage         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int	ft_dup_check(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_both	*t;
+	int		ret;
 
 	if (ac == 1)
 		return (0);
@@ -71,7 +72,8 @@ int	main(int ac, char **av)
 		return (1);
 	while (sorted(t) != 0)
 	{
-		if (solver(t) != 1)
+		ret = solver(&t);
+		if (ret != 0)
 			return (1);
 	}
 	both_free(t);

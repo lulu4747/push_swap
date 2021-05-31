@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:44 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:48:46 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/05/31 17:38:44 by lfourage         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	cmd_print(char *s1, char *s2, t_both **t);
 void	get_on_top(t_both *t, t_stk **stk, int n, char s);
 int		*stk_cpy_srt(t_stk *stk, int size);
 int		sorted(t_both *t);
-int		solver(t_both *t);
+int		solver(t_both **t);
 int		chunk_srt(t_both *t, int n, int size);
 
 #endif

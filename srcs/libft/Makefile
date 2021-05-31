@@ -33,8 +33,7 @@ $(NAME): $(OBJ) $(INC)
 	ar rc $(NAME) $(OBJ) $(INC)
 
 clean:
-	rm -rf $(OBJ)
-	rm -rf $(BONUS_OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
