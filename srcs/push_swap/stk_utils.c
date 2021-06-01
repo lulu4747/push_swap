@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stk_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:49:49 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:50:09 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 18:34:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,27 @@ t_stk	*stk_last(t_stk *stk)
 	while (last->next != stk)
 		last = last->next;
 	return (last);
+}
+
+void	get_on_top(t_both *t, t_stk **stk, int n, int cmd)
+{
+	int	pos;
+	int	size;
+
+	if (cmd == RA)
+		size = t->a_size;
+	else
+		size = t->b_size;
+	pos = stk_get((*stk), n);
+	if ((pos > size / 2 && !(size % 2)) || pos > ((size / 2) + 1))
+	{
+		cmd += 5;
+		while ((*stk)->n != n)
+			cmd_send(cmd, 0, &t);
+	}
+	else
+	{
+		while ((*stk)->n != n)
+			cmd_send(cmd, 0, &t);
+	}
 }

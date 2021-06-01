@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:44 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 17:38:44 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 17:11:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include <unistd.h>
 # include <stdio.h>
 # include "../libft/libft.h"
+
+# define SA		1
+# define SB		2
+# define SS		3
+# define RA		4
+# define RB		5
+# define RR		6
+# define PA		7
+# define PB		8
+# define RRA	9
+# define RRB	10
+# define RRR	11
 
 typedef struct s_stk
 {
@@ -29,14 +41,16 @@ typedef struct s_both
 	int		b_size;
 	t_stk	*a;
 	t_stk	*b;
+	t_stk	*cmd;
 }	t_both;
 
 /*--Instructions*/
 
-int		get_ins(char *ins, t_both **t);
-int		swap_read(char *ins, t_both **t);
-int		push_read(char *ins, t_both **t);
-int		rotate_read(char *ins, t_both **t);
+int		cmd_send(int cmd1, int cmd2, t_both **t);
+int		cmd_get(int cmd, t_both **t);
+int		swap_read(int cmd, t_both **t);
+int		push_read(int cmd, t_both **t);
+int		rotate_read(int cmd, t_both **t);
 
 /*--Memory--*/
 
@@ -46,15 +60,14 @@ t_stk	*stk_last(t_stk *stk);
 int		stk_get(t_stk *stk, int n);
 int		stk_min(t_stk *stk);
 void	stk_free(t_stk *stk);
-void	both_free(t_both *t);
+void	both_free(t_both *t, int err);
 
 /*--Solver--*/
 
-void	cmd_print(char *s1, char *s2, t_both **t);
-void	get_on_top(t_both *t, t_stk **stk, int n, char s);
+void	get_on_top(t_both *t, t_stk **stk, int n, int cmd);
 int		*stk_cpy_srt(t_stk *stk, int size);
 int		sorted(t_both *t);
 int		solver(t_both **t);
-int		chunk_srt(t_both *t, int n, int size);
+int		chunk_srt(t_both *t);
 
 #endif

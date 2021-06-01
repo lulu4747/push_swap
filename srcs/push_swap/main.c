@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:34 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 17:34:16 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 19:19:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,18 @@ static int	ft_dup_check(int ac, char **av)
 	}
 	return (0);
 }
+/*
+static void	printa(t_stk *a)
+{
+	t_stk	*f;
+
+	f = a;
+	while (a->next != f)
+	{
+		printf("%d\n", a->n);
+		a = a->next;
+	}
+}*/
 
 int	main(int ac, char **av)
 {
@@ -76,6 +88,8 @@ int	main(int ac, char **av)
 		if (ret != 0)
 			return (1);
 	}
-	both_free(t);
+	//if (t->b_size > 0)
+	//	printa(t->a);
+	both_free(t, 0);
 	return (0);
 }

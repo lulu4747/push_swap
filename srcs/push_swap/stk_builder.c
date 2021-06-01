@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stk_builder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:49:34 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 16:30:43 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 14:22:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_both	*init_stk(char **lst, int ac)
 		return (NULL);
 	}
 	r->b = NULL;
+	r->cmd = NULL;
 	r->a_size = ac - 1;
 	r->b_size = 0;
 	return (r);

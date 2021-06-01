@@ -3,52 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:49:58 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:49:58 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 15:26:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-static int	swap(t_stk *stk)
+static void	swap(t_stk *stk)
 {
 	char	tmp;
 
-	if (stk->next == stk)
-		return (1);
 	tmp = stk->n;
 	stk->n = stk->next->n;
 	stk->next->n = tmp;
-	return (0);
 }
 
-int	swap_read(char *ins, t_both **t)
+int	swap_read(int cmd, t_both **t)
 {
-	int	r;
-
-	r = 1;
-	if (ins[2] != 0)
-		write(2, "Invalid instruction\n", 20);
-	else if (ins[1] == 'a')
-	{
-		if ((*t)->a_size > 1)
-			return (swap((*t)->a));
-	}
-	else if (ins[1] == 'b')
-	{
-		if ((*t)->b_size > 1)
-			return (swap((*t)->b));
-	}
-	else if (ins[1] == 's')
-	{
-		if ((*t)->a_size > 1)
-			r = swap((*t)->a);
-		if ((*t)->b_size > 1 && (r + swap((*t)->b) == 0))
-			return (0);
-	}
-	else
-		write(2, "Invalid instruction\n", 20);
-	return (1);
+	if ((cmd == SA || cmd == SS) && (*t)->a_size > 1)
+		swap((*t)->a);
+	if ((cmd == SB || cmd == SS) && (*t)->b_size > 1)
+		swap((*t)->b);
+	return (0);
 }

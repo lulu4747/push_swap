@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:49:17 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 16:59:00 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 18:32:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ static t_both	*three_srt(t_both *t)
 	if (t->a->n < t->a->next->n)
 	{
 		if (t->a->n < t->a->next->next->n)
-			cmd_print("sa", "ra", &t);
+			cmd_send(SA, RA, &t);
 		else
-			cmd_print("rra", NULL, &t);
+			cmd_send(RRA, 0, &t);
 	}
 	else
 	{
 		if (t->a->n < t->a->next->next->n)
-			cmd_print("sa", NULL, &t);
+			cmd_send(SA, 0, &t);
 		else if (t->a->next->n < t->a->next->next->n)
-			cmd_print("ra", NULL, &t);
+			cmd_send(RA, 0, &t);
 		else
-			cmd_print("sa", "rra", &t);
+			cmd_send(SA, RRA, &t);
 	}
 	return (t);
 }
@@ -37,13 +37,13 @@ static int	quick(t_both **t)
 {
 	while ((*t)->a_size > 3 && sorted(*t) == 1)
 	{
-		get_on_top(*t, &((*t)->a), stk_min((*t)->a), 'a');
-		cmd_print("pb", NULL, t);
+		get_on_top(*t, &((*t)->a), stk_min((*t)->a), RA);
+		cmd_send(PB, 0, t);
 	}
 	if (sorted(*t) == 1)
 		*t = three_srt(*t);
 	while ((*t)->b_size > 0)
-		cmd_print("pa", NULL, t);
+		cmd_send(PA, 0, t);
 	return (0);
 }
 
@@ -51,11 +51,11 @@ static int	simple(t_both **t)
 {
 	while ((*t)->a_size > 0)
 	{
-		get_on_top(*t, &((*t)->a), stk_min((*t)->a), 'a');
-		cmd_print("pb", NULL, t);
+		get_on_top(*t, &((*t)->a), stk_min((*t)->a), RA);
+		cmd_send(PB, 0, t);
 	}
 	while ((*t)->b_size > 0)
-		cmd_print("pa", NULL, t);
+		cmd_send(PA, 0, t);
 	return (0);
 }
 
@@ -91,7 +91,5 @@ int	solver(t_both **t)
 		return (quick(t));
 	else if ((*t)->a_size <= 17)
 		return (simple(t));
-	if ((*t)->a_size <= 100)
-		return (chunk_srt(*t, ((*t)->a_size / 17), 17));
-	return (chunk_srt(*t, ((*t)->a_size / 45), 45));
+	return (chunk_srt(*t));
 }

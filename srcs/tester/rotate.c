@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <lfourage@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:50:55 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 18:45:13 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 12:01:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ static t_stk	*r_rotate(t_stk *stk)
 
 static int	reverse_read(char *ins, t_both **t)
 {
-	if (ins[3] != 0)
+	if (ins[2] == 0)
+	{
+		if ((*t)->a_size > 0)
+			(*t)->a = rotate((*t)->a);
+		if ((*t)->b_size > 0)
+			(*t)->b = rotate((*t)->b);
+	}
+	else if (ins[3] != 0)
 	{
 		write(2, "Error\n", 6);
 		return (1);
@@ -41,13 +48,6 @@ static int	reverse_read(char *ins, t_both **t)
 		(*t)->a = r_rotate((*t)->a);
 	else if (ins[2] == 'b' && (*t)->b_size > 0)
 		(*t)->b = r_rotate((*t)->b);
-	else if (ins[2] == 'r')
-	{
-		if ((*t)->a_size > 0)
-			(*t)->a = r_rotate((*t)->a);
-		if ((*t)->b_size > 0)
-			(*t)->b = r_rotate((*t)->b);
-	}
 	else
 	{
 		write(2, "Error\n", 6);

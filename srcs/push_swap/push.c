@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:54 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:48:56 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 15:19:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,19 @@ static int	push(t_stk **fr, t_stk **to)
 	return (0);
 }
 
-int	push_read(char *ins, t_both **t)
+int	push_read(int cmd, t_both **t)
 {
-	if (ins[2] != 0)
-		write(2, "Invalid instruction\n", 20);
-	else if (ins[1] == 'a')
+	if (cmd == PA && (*t)->b_size >= 1)
 	{
-		if ((*t)->b_size >= 1)
-		{
-			(*t)->a_size++;
-			(*t)->b_size--;
-			return (push(&((*t)->b), &((*t)->a)));
-		}
-		return (1);
+		(*t)->a_size++;
+		(*t)->b_size--;
+		return (push(&((*t)->b), &((*t)->a)));
 	}
-	else if (ins[1] == 'b')
+	else if (cmd == PB && (*t)->a_size >= 1)
 	{
-		if ((*t)->a_size >= 1)
-		{
-			(*t)->b_size++;
-			(*t)->a_size--;
-			return (push(&((*t)->a), &((*t)->b)));
-		}
-		return (1);
+		(*t)->b_size++;
+		(*t)->a_size--;
+		return (push(&((*t)->a), &((*t)->b)));
 	}
-	else
-		write(2, "Invalid instruction\n", 20);
 	return (1);
 }
