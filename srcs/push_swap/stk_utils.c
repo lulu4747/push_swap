@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:49:49 by lfourage          #+#    #+#             */
-/*   Updated: 2021/06/01 18:34:52 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/03 00:52:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	get_on_top(t_both *t, t_stk **stk, int n, int cmd)
 	int	pos;
 	int	size;
 
+	if (n == 0)
+		return ;
 	if (cmd == RA)
 		size = t->a_size;
 	else

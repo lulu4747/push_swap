@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stk_clear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:51:05 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:51:06 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 01:54:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	stk_free(t_stk *stk)
 	t_stk	*nxt;
 
 	fre = stk->next;
-	while (fre != stk)
+	while (fre != NULL && fre != stk)
 	{
 		nxt = fre->next;
 		free(fre);

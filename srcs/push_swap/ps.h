@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:44 by lfourage          #+#    #+#             */
-/*   Updated: 2021/06/02 22:32:25 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/03 00:46:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 typedef struct s_stk
 {
 	int				n;
+	struct s_stk	*prev;
 	struct s_stk	*next;
 }	t_stk;
 
@@ -65,6 +66,7 @@ void	both_free(t_both *t, int err);
 /*--Solver--*/
 
 void	get_on_top(t_both *t, t_stk **stk, int n, int cmd);
+int		fnd(t_stk *first, int cs, int max);
 int		*stk_cpy_srt(t_stk *stk, int size);
 int		sorted(t_both *t);
 int		solver(t_both **t);

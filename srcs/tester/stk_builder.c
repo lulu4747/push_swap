@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stk_builder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:51:02 by lfourage          #+#    #+#             */
-/*   Updated: 2021/05/31 12:51:02 by lfourage         ###   ########lyon.fr   */
+/*   Updated: 2021/06/03 01:50:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ static t_stk	*stk_element(char *nb)
 
 static t_stk	*build_stk(char **lst, int ac)
 {
-	t_stk	*stk;
 	t_stk	*top;
+	t_stk	*stk;
+	t_stk	*prev;
 	int		i;
 
 	i = 1;
@@ -42,8 +43,9 @@ static t_stk	*build_stk(char **lst, int ac)
 	top = stk;
 	while (++i < ac)
 	{
-		stk->next = stk_element(lst[i]);
-		stk = stk->next;
+		prev = stk;
+		stk = stk_element(lst[i]);
+		prev->next = stk;
 		if (!stk)
 		{
 			stk_free(top);

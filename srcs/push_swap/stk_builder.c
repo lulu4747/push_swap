@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:49:34 by lfourage          #+#    #+#             */
-/*   Updated: 2021/06/01 14:22:44 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/02 23:34:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ static t_stk	*stk_element(char *nb)
 
 static t_stk	*build_stk(char **lst, int ac)
 {
-	t_stk	*stk;
 	t_stk	*top;
+	t_stk	*stk;
+	t_stk	*prev;
 	int		i;
 
 	i = 1;
@@ -42,15 +43,18 @@ static t_stk	*build_stk(char **lst, int ac)
 	top = stk;
 	while (++i < ac)
 	{
-		stk->next = stk_element(lst[i]);
-		stk = stk->next;
+		prev = stk;
+		stk = stk_element(lst[i]);
+		prev->next = stk;
 		if (!stk)
 		{
 			stk_free(top);
 			return (NULL);
 		}
+		stk->prev = prev;
 	}
 	stk->next = top;
+	top->prev = stk;
 	return (top);
 }
 

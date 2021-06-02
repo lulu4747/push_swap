@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:54 by lfourage          #+#    #+#             */
-/*   Updated: 2021/06/01 15:19:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/02 23:47:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,20 @@ static int	empty_stk(t_stk **fr, t_stk **to)
 {
 	t_stk	*cut;
 
-	cut = stk_last(*to);
+	cut = (*to)->prev;
 	(*fr)->next = *to;
+	(*to)->prev = *fr;
 	*to = *fr;
 	*fr = NULL;
 	cut->next = *to;
+	(*to)->prev = cut;
 	return (0);
+}
+
+static void	nxt_prv(t_stk **fr, t_stk **to)
+{
+	(*fr)->next = *to;
+	(*to)->prev = *fr;
 }
 
 static int	push(t_stk **fr, t_stk **to)
@@ -30,21 +38,20 @@ static int	push(t_stk **fr, t_stk **to)
 
 	if ((*fr)->next == *fr)
 		return (empty_stk(fr, to));
-	cut = stk_last(*fr);
+	cut = (*fr)->prev;
 	cut->next = (*fr)->next;
+	(*fr)->next->prev = cut;
 	if (!(*to))
-	{
-		(*fr)->next = *fr;
-		*to = *fr;
-	}
+		nxt_prv(fr, fr);
 	else
 	{
-		(*fr)->next = *to;
+		nxt_prv(fr, to);
 		*to = stk_last(*to);
-		((*to)->next) = *fr;
-		*to = *fr;
+		nxt_prv(to, fr);
 	}
+	*to = *fr;
 	*fr = cut->next;
+	(*fr)->prev = cut;
 	return (0);
 }
 

@@ -6,40 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:28 by lfourage          #+#    #+#             */
-/*   Updated: 2021/06/02 21:16:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/03 01:29:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
-
-static int	fnd(t_stk *first, t_stk *t, int cs, int max)
-{
-	int		n[4];
-
-	if (first->n >= cs && first->n <= max)
-		return (first->n);
-	n[0] = 0;
-	n[1] = 0;
-	n[2] = 0;
-	n[3] = 1;
-	while (t != first)
-	{
-		if (t->n >= cs && t->n <= max)
-		{
-			if (n[0] == 0)
-				n[0] = t->n;
-			n[1] = t->n;
-			n[2] = 0;
-		}
-		if (n[0] == 0)
-			(n[3])++;
-		(n[2])++;
-		t = t->next;
-	}
-	if (n[3] <= n[2] || n[2] - n[3] - cs < n[1] - n[0])
-		return (n[0]);
-	return (n[1]);
-}
 
 static int	fnd_sub(t_stk *first, int n)
 {
@@ -64,7 +35,7 @@ static int	chunk(t_both *t, int c, int s)
 	i = 0;
 	while (i < s)
 	{
-		get_on_top(t, &(t->a), fnd(t->a, t->a->next, c, (c + (s - 1))), RA);
+		get_on_top(t, &(t->a), fnd(t->a, c, (c + (s - 1))), RA);
 		if (t->b_size > 1)
 			get_on_top(t, &(t->b), fnd_sub(t->b, t->a->n), RB);
 		cmd_send(PB, 0, &t);
@@ -75,14 +46,16 @@ static int	chunk(t_both *t, int c, int s)
 
 static int tweak_size(int n)
 {
-	if (n > 400)
+	if (n > 450)
 		return (n * 0.09);
+	if (n > 400)
+		return (n * 0.095);
 	if (n > 300)
 		return (n * 0.10);
 	if (n > 200)
 		return (n * 0.12);
 	if (n > 100)
-		return (n * 0.15);
+		return (n * 0.18);
 	if (n > 70)
 		return (n * 0.20);
 	if (n > 45)

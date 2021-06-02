@@ -1,6 +1,7 @@
 NAME			= push_swap
 
 SRCS			= chunk_srt.c
+SRCS			+= finder.c
 SRCS			+= main.c
 SRCS			+= push.c
 SRCS			+= rotate.c
