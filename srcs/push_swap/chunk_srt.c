@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 12:48:28 by lfourage          #+#    #+#             */
-/*   Updated: 2021/06/01 17:06:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/02 21:16:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 
 static int	fnd(t_stk *first, t_stk *t, int cs, int max)
 {
-	int		count[4];
+	int		n[4];
 
 	if (first->n >= cs && first->n <= max)
 		return (first->n);
-	count[0] = 0;
-	count[1] = 0;
-	count[2] = 0;
-	count[3] = 1;
+	n[0] = 0;
+	n[1] = 0;
+	n[2] = 0;
+	n[3] = 1;
 	while (t != first)
 	{
 		if (t->n >= cs && t->n <= max)
 		{
-			if (count[0] == 0)
-				count[0] = t->n;
-			count[1] = t->n;
-			count[2] = 0;
+			if (n[0] == 0)
+				n[0] = t->n;
+			n[1] = t->n;
+			n[2] = 0;
 		}
-		if (count[0] == 0)
-			(count[3])++;
-		(count[2])++;
+		if (n[0] == 0)
+			(n[3])++;
+		(n[2])++;
 		t = t->next;
 	}
-	if (count[3] <= count[2])
-		return (count[0]);
-	return (count[1]);
+	if (n[3] <= n[2] || n[2] - n[3] - cs < n[1] - n[0])
+		return (n[0]);
+	return (n[1]);
 }
 
 static int	fnd_sub(t_stk *first, int n)
@@ -108,7 +108,6 @@ int	chunk_srt(t_both *t)
 		get_on_top(t, &(t->b), t->b_size, RB);
 		if (cmd_send(PA, 0, &t) != 0)
 			return (1);
-		cs--;
 	}
 	return (0);
 }
