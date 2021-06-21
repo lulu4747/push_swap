@@ -27,6 +27,23 @@ static int	nb_cmp(char *s1, char *s2)
 	return (0);
 }
 
+static int	ft_check_first(char *str)
+{
+	int	tmp;
+
+	if (ft_is_number(str) != 0)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	if (ft_atoi_secure(&tmp, str) != 0)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	return (0);
+}
+
 static int	ft_dup_check(int ac, char **av)
 {
 	int	i;
@@ -34,11 +51,8 @@ static int	ft_dup_check(int ac, char **av)
 
 	i = 1;
 	j = ac - 1;
-	if (ft_is_number(av[j]) != 0)
-	{
-		write(2, "Error\n", 6);
+	if (ft_check_first(av[j]) != 0)
 		return (1);
-	}
 	while (i < j)
 	{
 		j = i + 1;
@@ -91,12 +105,13 @@ int	main(int ac, char **av)
 		return (1);
 	ret = 1;
 	line = NULL;
-	while (ret)
+	while (ret && ret != -1)
 	{
 		ret = get_next_line(&line, &ret);
-		get_ins(line, &t);
+		if (get_ins(line, &t) != 0)
+			ret = -1;
 		free(line);
 		line = NULL;
 	}
-	return (is_sorted(&t));
+	return (is_sorted(&t, ret));
 }

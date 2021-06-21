@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   finder.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfourage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/21 17:33:11 by lfourage          #+#    #+#             */
+/*   Updated: 2021/06/21 17:33:14 by lfourage         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
 static int	first_scan(t_stk *t)
@@ -57,7 +69,7 @@ int	fnd(t_stk *first, int min, int max)
 	int	top;
 	int	bot;
 	int	ct;
-	int cb;
+	int	cb;
 
 	if (first->n >= min && first->n <= max)
 		return (first_scan(first));

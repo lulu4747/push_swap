@@ -27,13 +27,11 @@ static int	cmpn(t_stk *stk)
 	return (0);
 }
 
-int	is_sorted(t_both **t)
+int	is_sorted(t_both **t, int ret)
 {
 	t_stk	*stk;
-	int		ret;
 
-	ret = 0;
-	if ((*t)->b_size != 0)
+	if ((*t)->b_size != 0 && !ret)
 	{
 		write(2, "KO\n", 3);
 		ret = 1;

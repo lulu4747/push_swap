@@ -70,13 +70,27 @@ int	get_ins(char *ins, t_both **t)
 {
 	if (ins == NULL)
 		return (0);
-	if (ins[0] == 's')
-		return (swap_read(ins, t));
-	else if (ins[0] == 'p')
-		return (push_read(ins, t));
-	else if (ins[0] == 'r')
-		return (rotate_read(ins, t));
-	else if (ins[0] != 0)
-		write(2, "Error\n", 6);
-	return (0);
+	else if (!ft_strcmp(ins, "sa"))
+		return (swap_read(SA, t));
+	else if (!ft_strcmp(ins, "sb"))
+		return (swap_read(SB, t));
+	else if (!ft_strcmp(ins, "ss"))
+		return (swap_read(SS, t));
+	else if (!ft_strcmp(ins, "ra"))
+		return (rotate_read(RA, t));
+	else if (!ft_strcmp(ins, "rb"))
+		return (rotate_read(RB, t));
+	else if (!ft_strcmp(ins, "rr"))
+		return (rotate_read(RR, t));
+	else if (!ft_strcmp(ins, "pa"))
+		return (push_read(PA, t));
+	else if (!ft_strcmp(ins, "pb"))
+		return (push_read(PB, t));
+	else if (!ft_strcmp(ins, "rra"))
+		return (rotate_read(RRA, t));
+	else if (!ft_strcmp(ins, "rrb"))
+		return (rotate_read(RRB, t));
+	else if (!ft_strcmp(ins, "rrr"))
+		return (rotate_read(RRR, t));
+	return (write(2, "Error\n", 6));
 }

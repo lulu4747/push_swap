@@ -29,6 +29,24 @@ static int	nb_cmp(char *s1, char *s2)
 	return (0);
 }
 
+static int	ft_check_first(char *str)
+{
+	int	tmp;
+
+	if (ft_is_number(str) != 0)
+	{
+		write(2, "Error\nNon-numerical value found\n", 32);
+		write(2, "Closing program\n", 16);
+		return (1);
+	}
+	if (ft_atoi_secure(&tmp, str) != 0)
+	{
+		write(2, "Error\nOverflow\nClosing program\n", 32);
+		return (1);
+	}
+	return (0);
+}
+
 static int	ft_dup_check(int ac, char **av)
 {
 	int	i;
@@ -36,12 +54,8 @@ static int	ft_dup_check(int ac, char **av)
 
 	i = 1;
 	j = ac - 1;
-	if (ft_is_number(av[j]) != 0)
-	{
-		write(2, "Error\nNon-numerical value found\n", 32);
-		write(2, "Closing program\n", 16);
+	if (ft_check_first(av[j]) != 0)
 		return (1);
-	}
 	while (i < j)
 	{
 		j = i + 1;

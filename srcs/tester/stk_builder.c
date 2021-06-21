@@ -51,8 +51,10 @@ static t_stk	*build_stk(char **lst, int ac)
 			stk_free(top);
 			return (NULL);
 		}
+		stk->prev = prev;
 	}
 	stk->next = top;
+	top->prev = stk;
 	return (top);
 }
 

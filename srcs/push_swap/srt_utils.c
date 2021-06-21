@@ -33,17 +33,6 @@ int	*stk_cpy_srt(t_stk *stk, int size)
 	return (t);
 }
 
-int	cmd_get(int cmd, t_both **t)
-{
-	if (cmd >= SA && cmd <= SS)
-		return (swap_read(cmd, t));
-	else if (cmd == PA || cmd == PB)
-		return (push_read(cmd, t));
-	else if (cmd >= RA && cmd <= RRR)
-		return (rotate_read(cmd, t));
-	return (0);
-}
-
 int	sorted(t_both *t)
 {
 	t_stk	*stk;
@@ -60,58 +49,6 @@ int	sorted(t_both *t)
 		if (n1 > n2)
 			return (1);
 		stk = stk->next;
-	}
-	return (0);
-}
-
-static int	cmd_save(int cmd, t_both **t)
-{
-	t_stk	*c;
-
-	if (!(*t)->cmd)
-	{
-		(*t)->cmd = malloc(sizeof(t_stk));
-		if (!(*t)->cmd)
-			return (1);
-		(*t)->cmd->next = NULL;
-		c = (*t)->cmd;
-	}
-	else
-	{
-		c = (*t)->cmd;
-		while (c->next != NULL)
-			c = c->next;
-		c->next = malloc(sizeof(t_stk));
-		if (!c->next)
-		{
-			stk_free((*t)->cmd);
-			return (1);
-		}
-		c = c->next;
-	}
-	c->n = cmd;
-	c->next = NULL;
-	return (0);
-}
-
-int	cmd_send(int cmd1, int cmd2, t_both **t)
-{
-	cmd_get(cmd1, t);
-	cmd_save(cmd1, t);
-	if (!((*t)->cmd))
-	{
-		both_free(*t, 1);
-		return (1);
-	}
-	if (cmd2 != 0)
-	{
-		cmd_get(cmd2, t);
-		cmd_save(cmd2, t);
-		if (!((*t)->cmd))
-		{
-			both_free(*t, 1);
-			return (1);
-		}
 	}
 	return (0);
 }

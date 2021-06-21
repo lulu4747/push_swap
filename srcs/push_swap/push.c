@@ -57,17 +57,25 @@ static int	push(t_stk **fr, t_stk **to)
 
 int	push_read(int cmd, t_both **t)
 {
-	if (cmd == PA && (*t)->b_size >= 1)
+	if (cmd == PA)
 	{
-		(*t)->a_size++;
-		(*t)->b_size--;
-		return (push(&((*t)->b), &((*t)->a)));
+		if ((*t)->b_size > 0)
+		{
+			(*t)->a_size++;
+			(*t)->b_size--;
+			return (push(&((*t)->b), &((*t)->a)));
+		}
+		return (0);
 	}
-	else if (cmd == PB && (*t)->a_size >= 1)
+	else if (cmd == PB)
 	{
-		(*t)->b_size++;
-		(*t)->a_size--;
-		return (push(&((*t)->a), &((*t)->b)));
+		if ((*t)->a_size > 0)
+		{
+			(*t)->b_size++;
+			(*t)->a_size--;
+			return (push(&((*t)->a), &((*t)->b)));
+		}
+		return (0);
 	}
 	return (1);
 }

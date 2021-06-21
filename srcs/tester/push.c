@@ -16,12 +16,20 @@ static int	empty_stk(t_stk **fr, t_stk **to)
 {
 	t_stk	*cut;
 
-	cut = stk_last(*to);
+	cut = (*to)->prev;
 	(*fr)->next = *to;
+	(*to)->prev = *fr;
 	*to = *fr;
 	*fr = NULL;
 	cut->next = *to;
+	(*to)->prev = cut;
 	return (0);
+}
+
+static void	nxt_prv(t_stk **fr, t_stk **to)
+{
+	(*fr)->next = *to;
+	(*to)->prev = *fr;
 }
 
 static int	push(t_stk **fr, t_stk **to)
@@ -30,49 +38,44 @@ static int	push(t_stk **fr, t_stk **to)
 
 	if ((*fr)->next == *fr)
 		return (empty_stk(fr, to));
-	cut = stk_last(*fr);
+	cut = (*fr)->prev;
 	cut->next = (*fr)->next;
+	(*fr)->next->prev = cut;
 	if (!(*to))
-	{
-		(*fr)->next = *fr;
-		*to = *fr;
-	}
+		nxt_prv(fr, fr);
 	else
 	{
-		(*fr)->next = *to;
+		nxt_prv(fr, to);
 		*to = stk_last(*to);
-		((*to)->next) = *fr;
-		*to = *fr;
+		nxt_prv(to, fr);
 	}
+	*to = *fr;
 	*fr = cut->next;
+	(*fr)->prev = cut;
 	return (0);
 }
 
-int	push_read(char *ins, t_both **t)
+int	push_read(int cmd, t_both **t)
 {
-	if (ins[2] != 0)
-		write(2, "Error\n", 6);
-	else if (ins[1] == 'a')
+	if (cmd == PA)
 	{
-		if ((*t)->b_size >= 1)
+		if ((*t)->b_size > 0)
 		{
 			(*t)->a_size++;
 			(*t)->b_size--;
 			return (push(&((*t)->b), &((*t)->a)));
 		}
-		return (1);
+		return (0);
 	}
-	else if (ins[1] == 'b')
+	else if (cmd == PB)
 	{
-		if ((*t)->a_size >= 1)
+		if ((*t)->a_size > 0)
 		{
 			(*t)->b_size++;
 			(*t)->a_size--;
 			return (push(&((*t)->a), &((*t)->b)));
 		}
-		return (1);
+		return (0);
 	}
-	else
-		write(2, "Error\n", 6);
 	return (1);
 }

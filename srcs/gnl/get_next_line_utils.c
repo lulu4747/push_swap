@@ -1,9 +1,9 @@
 #include "get_next_line.h"
 #include <string.h>
 
-size_t		ft_slen(const char *ptr)
+size_t	ft_slen(const char *ptr)
 {
-	size_t i;
+	size_t	i;
 
 	if (ptr == NULL || !ptr)
 		return (0);
@@ -13,7 +13,7 @@ size_t		ft_slen(const char *ptr)
 	return (i);
 }
 
-int			ft_istrchr(char *ptr, char c)
+int	ft_istrchr(char *ptr, char c)
 {
 	int		i;
 	int		j;
@@ -29,26 +29,32 @@ int			ft_istrchr(char *ptr, char c)
 	return (-1);
 }
 
-char		*ft_strjoinfree(char *start, char *end, int f)
+char	*nw_pt_fill(char *start, char *end, char *nw_pt)
 {
-	char	*nw_pt;
 	size_t	i;
 	size_t	j;
 
-	i = ft_slen(start) + ft_slen(end);
-	if ((nw_pt = (char *)malloc(sizeof(char) * (i + 1))))
+	i = 0;
+	j = 0;
+	while (start && start[i])
 	{
-		i = 0;
-		j = 0;
-		while (start && start[i])
-		{
-			nw_pt[i] = start[i];
-			i++;
-		}
-		while (end && end[j])
-			nw_pt[i++] = end[j++];
-		nw_pt[i] = '\0';
+		nw_pt[i] = start[i];
+		i++;
 	}
+	while (end && end[j])
+		nw_pt[i++] = end[j++];
+	nw_pt[i] = '\0';
+}
+
+char	*ft_strjoinfree(char *start, char *end, int f)
+{
+	char	*nw_pt;
+	size_t	i;
+
+	i = ft_slen(start) + ft_slen(end);
+	nw_pt = (char *)malloc(sizeof(char) * (i + 1));
+	if (nw_pt)
+		nw_pt = nw_pt_fill(start, end, nw_pt);
 	else
 		f = 0;
 	if (start && (f == 1 || f == 0))
@@ -58,7 +64,7 @@ char		*ft_strjoinfree(char *start, char *end, int f)
 	return (nw_pt);
 }
 
-char		*ft_strccpy(char *start, char c)
+char	*ft_strccpy(char *start, char c)
 {
 	char	*ptr;
 	int		i;
@@ -70,7 +76,8 @@ char		*ft_strccpy(char *start, char c)
 		return (ft_calloc(sizeof(char), 1));
 	while (start[len] != '\0' && start[len] != c)
 		len++;
-	if ((ptr = (char *)malloc(sizeof(char) * (len + 1))))
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (ptr)
 	{
 		while (start[i] && start[i] != c)
 		{

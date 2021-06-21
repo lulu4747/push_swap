@@ -44,7 +44,7 @@ static int	chunk(t_both *t, int c, int s)
 	return (s);
 }
 
-static int tweak_size(int n)
+static int	tweak_size(int n)
 {
 	if (n > 450)
 		return (n * 0.09);
